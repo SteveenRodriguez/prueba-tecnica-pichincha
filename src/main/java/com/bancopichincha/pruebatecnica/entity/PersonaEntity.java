@@ -4,15 +4,15 @@ import lombok.*;
 
 import javax.persistence.*;
 
-@Entity
-@Table(name = "persona")
+@Entity(name = "persona")
 @Getter
 @Setter
 @AllArgsConstructor
 @NoArgsConstructor
+@Inheritance(strategy = InheritanceType.JOINED)
 public class PersonaEntity {
     @Id
-    @GeneratedValue(strategy = GenerationType.IDENTITY) // UUID
+    @GeneratedValue(strategy = GenerationType.IDENTITY)
     @Column(name = "id_persona")
     private Integer idPersona;
 
@@ -26,7 +26,7 @@ public class PersonaEntity {
     private String edad;
 
     @Column
-    private String identificacion;
+    private Integer identificacion;
 
     @Column
     private String direccion;
@@ -35,7 +35,7 @@ public class PersonaEntity {
     private String telefono;
 
 //    TODO: Realizar las relaciones
-    @OneToOne
-    @JoinColumn()
-    private ClienteEntity clienteEntity;
+//    @OneToOne
+//    @JoinColumn(name = "idCliente")
+//    private ClienteEntity clienteEntity;
 }

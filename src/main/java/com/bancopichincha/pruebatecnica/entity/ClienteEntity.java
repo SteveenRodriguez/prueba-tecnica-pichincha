@@ -4,20 +4,24 @@ import lombok.AllArgsConstructor;
 import lombok.Getter;
 import lombok.NoArgsConstructor;
 import lombok.Setter;
+import org.springframework.context.annotation.Primary;
 
 import javax.persistence.*;
 
-@Entity
-@Table(name = "cliente")
+@Entity(name = "cliente")
 @Getter
 @Setter
 @AllArgsConstructor
 @NoArgsConstructor
+@PrimaryKeyJoinColumn(referencedColumnName = "id_persona")
 public class ClienteEntity extends PersonaEntity{
-    @GeneratedValue(strategy = GenerationType.IDENTITY)
-    @Column
-    private Integer idCliente;
 
+//    @Id
+//    @GeneratedValue(strategy = GenerationType.IDENTITY)
+//    @Column
+//    private Integer idCliente;
+
+//    @GeneratedValue(strategy = GenerationType.IDENTITY)
     @Column
     private String clienteId;
 
@@ -29,8 +33,8 @@ public class ClienteEntity extends PersonaEntity{
 
 //    TODO: Realizar las relaciones -> Un cliente es una Persona
 
-    @OneToOne
-    @JoinColumn()
-    private PersonaEntity personaEntity;
+//    @OneToOne
+//    @JoinColumn(name = "idPersona")
+//    private PersonaEntity personaEntity;
 
 }
