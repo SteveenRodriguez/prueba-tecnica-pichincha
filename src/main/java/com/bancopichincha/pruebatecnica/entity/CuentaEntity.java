@@ -1,5 +1,7 @@
 package com.bancopichincha.pruebatecnica.entity;
 
+import com.bancopichincha.pruebatecnica.service.dto.Cuenta;
+import com.bancopichincha.pruebatecnica.service.dto.Movimiento;
 import lombok.AllArgsConstructor;
 import lombok.Getter;
 import lombok.NoArgsConstructor;
@@ -7,17 +9,17 @@ import lombok.Setter;
 
 import javax.persistence.*;
 
-@Entity
-@Table(name = "cuenta")
+@Entity(name = "cuenta")
 @Getter
 @Setter
 @AllArgsConstructor
 @NoArgsConstructor
+@PrimaryKeyJoinColumn(referencedColumnName = "id_persona")
 public class CuentaEntity {
     @Id
     @GeneratedValue(strategy = GenerationType.IDENTITY)
-    @Column
-    private Integer id;
+    @Column(name = "cuenta_id")
+    private Integer cuentaId;
 
     @Column(name = "numero_cuenta")
     private String numeroCuenta;
@@ -31,5 +33,15 @@ public class CuentaEntity {
     @Column
     private Boolean estado;
 
+    @Column
+    private Movimiento[] movimientos;
+
     //    TODO: Realizar las relaciones 1 cliente puede tener muchas cuentas
+//    @ManyToOne
+//    @JoinColumn(name = "id_Persona")
+//    private PersonaEntity personaEntity;
+
+    @ManyToOne
+    @JoinColumn(name = "cliente_id")
+    private ClienteEntity clienteEntity;
 }

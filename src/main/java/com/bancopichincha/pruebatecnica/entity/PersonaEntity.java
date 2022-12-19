@@ -35,7 +35,6 @@ public class PersonaEntity {
     private String telefono;
 
 //    TODO: Realizar las relaciones
-//    @OneToOne
-//    @JoinColumn(name = "idCliente")
-//    private ClienteEntity clienteEntity;
+    @OneToOne(cascade = {CascadeType.ALL})
+    private ClienteEntity clienteEntity;
 }

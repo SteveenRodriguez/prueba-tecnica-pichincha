@@ -45,9 +45,9 @@ public class ClienteController {
     }
 
     @GetMapping("/clientes/{id}")
-    public ResponseEntity<Optional<ClienteEntity>> obtenerClientePorId(@PathVariable() Integer id) {
+    public ResponseEntity<Optional<Cliente>> obtenerClientePorId(@PathVariable() Integer id) {
         log.info("Obteniendo cliente por ID");
-        return new ResponseEntity<>(clienteService.obtenerClientePorId(id) ,HttpStatus.ACCEPTED);
+        return new ResponseEntity<>(clienteService.obtenerClientePorId(id) ,HttpStatus.OK);
     }
 
 

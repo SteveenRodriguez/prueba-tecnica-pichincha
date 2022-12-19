@@ -18,7 +18,7 @@ public class ClienteService {
         return clienteGateway.obtenerTodosLosCLientes();
     }
 
-    public Optional<ClienteEntity> obtenerClientePorId(Integer id) {
+    public Optional<Cliente> obtenerClientePorId(Integer id) {
         return clienteGateway.obtenerClientePorId(id);
     }
 
