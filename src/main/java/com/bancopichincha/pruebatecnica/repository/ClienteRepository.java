@@ -59,9 +59,21 @@ public class ClienteRepository implements ClienteGateway {
 
     @Override
     public Cliente actualizarCliente(Integer id, Cliente cliente) {
-        var encontrado = obtenerClientePorId(id).get();
-        encontrado.setNombre(cliente.getNombre());
-        return encontrado;
+        Cliente encontrado = obtenerClientePorId(id).get();
+        ClienteEntity entidad = new ClienteEntity();
+        entidad.setIdPersona(cliente.getIdPersona());
+        entidad.setNombre(cliente.getNombre());
+        entidad.setGenero(cliente.getGenero());
+        entidad.setEdad(cliente.getEdad());
+        entidad.setIdentificacion(cliente.getIdentificacion());
+        entidad.setDireccion(cliente.getDireccion());
+        entidad.setTelefono(cliente.getTelefono());
+        entidad.setClienteId(encontrado.getClientId());
+        entidad.setContrasenia(cliente.getContrasenia());
+        entidad.setEstado(cliente.getEstado());
+        entidad.setCuentas(cliente.getCuentas());
+        clienteCrudRepository.save(entidad);
+        return cliente;
     }
 
     @Override

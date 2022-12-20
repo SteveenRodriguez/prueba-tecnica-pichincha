@@ -5,6 +5,7 @@ import lombok.*;
 @Getter
 @Setter
 public class Movimiento {
+    private Integer idMovimiento;
     private String fecha;
     private String tipoMovimiento;
     private Double valor;

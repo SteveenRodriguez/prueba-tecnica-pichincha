@@ -27,11 +27,12 @@ public class CuentaRepository implements CuentaGateway {
         List<CuentaEntity> cuentasEntity = cuentaCrudRepository.findAll();
         return cuentasEntity.stream().map(cuentaEntity -> {
             Cuenta cuenta = new Cuenta();
-            cuenta.setId(cuentaEntity.getCuentaId());
+            cuenta.setCuentaId(cuentaEntity.getCuentaId());
             cuenta.setNumeroCuenta(cuentaEntity.getNumeroCuenta());
             cuenta.setTipoCuenta(cuentaEntity.getTipoCuenta());
             cuenta.setSaldoInicial(cuentaEntity.getSaldoInicial());
             cuenta.setEstado(cuentaEntity.getEstado());
+            cuenta.setMovimientos(cuentaEntity.getMovimientos());
             return cuenta;
         }).collect(Collectors.toList());
     }
@@ -41,11 +42,12 @@ public class CuentaRepository implements CuentaGateway {
         return cuentaCrudRepository.findById(id)
                 .map(cuentaEntity -> {
                     Cuenta cuenta = new Cuenta();
-                    cuenta.setId(cuentaEntity.getCuentaId());
+                    cuenta.setCuentaId(cuentaEntity.getCuentaId());
                     cuenta.setNumeroCuenta(cuentaEntity.getNumeroCuenta());
                     cuenta.setTipoCuenta(cuentaEntity.getTipoCuenta());
                     cuenta.setSaldoInicial(cuentaEntity.getSaldoInicial());
                     cuenta.setEstado(cuentaEntity.getEstado());
+                    cuenta.setMovimientos(cuentaEntity.getMovimientos());
                     return cuenta;
                 });
     }
@@ -59,6 +61,7 @@ public class CuentaRepository implements CuentaGateway {
         cuentaEntity.setTipoCuenta(cuenta.getTipoCuenta());
         cuentaEntity.setSaldoInicial(cuenta.getSaldoInicial());
         cuentaEntity.setEstado(cuenta.getEstado());
+        cuentaEntity.setMovimientos(cuenta.getMovimientos());
         try {
             cuentaCrudRepository.save(cuentaEntity);
             return cuenta;
@@ -76,10 +79,15 @@ public class CuentaRepository implements CuentaGateway {
 
     @Override
     public Cuenta actualizarCuenta(Integer id, Cuenta cuenta) {
-        var encontrada = obtenerCuentaPorId(id).get();
-        encontrada.setSaldoInicial(cuenta.getSaldoInicial());
-        return encontrada;
+        Cuenta encontrada = obtenerCuentaPorId(id).get();
+        CuentaEntity entidad = new CuentaEntity();
+        entidad.setCuentaId(cuenta.getCuentaId());
+        entidad.setNumeroCuenta(cuenta.getNumeroCuenta());
+        entidad.setTipoCuenta(cuenta.getTipoCuenta());
+        entidad.setSaldoInicial(cuenta.getSaldoInicial());
+        entidad.setEstado(cuenta.getEstado());
+        entidad.setMovimientos(cuenta.getMovimientos());
+        cuentaCrudRepository.save(entidad);
+        return cuenta;
     }
-
-
 }

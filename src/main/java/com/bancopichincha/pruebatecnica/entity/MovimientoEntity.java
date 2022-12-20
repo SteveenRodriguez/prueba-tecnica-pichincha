@@ -13,6 +13,7 @@ import javax.persistence.*;
 @Setter
 @AllArgsConstructor
 @NoArgsConstructor
+@PrimaryKeyJoinColumn(referencedColumnName = "id_persona")
 public class MovimientoEntity {
     @Id
     @GeneratedValue(strategy = GenerationType.IDENTITY)
@@ -30,4 +31,8 @@ public class MovimientoEntity {
 
     @Column
     private Double saldo;
+    //    TODO: Realizar las relaciones
+//    @ManyToOne
+//    @JoinColumn(name = "cuenta_id")
+//    private CuentaEntity cuentaEntity;
 }

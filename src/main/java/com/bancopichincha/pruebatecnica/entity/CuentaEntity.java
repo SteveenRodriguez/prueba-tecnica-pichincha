@@ -33,6 +33,8 @@ public class CuentaEntity {
     @Column
     private Boolean estado;
 
+//    @OneToMany
+//    @JoinColumn(name = "cuenta_id")
     @Column
     private Movimiento[] movimientos;
 
